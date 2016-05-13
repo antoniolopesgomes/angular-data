@@ -4,7 +4,7 @@
   "description": "Data model for angular 2",
   "main": "esm/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "./node_modules/.bin/tsc -p ."
   },
   "jsnext:main": "esm/index.js",
   "typins": "esm/index.d.ts",
