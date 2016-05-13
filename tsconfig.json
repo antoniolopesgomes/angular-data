@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es5",
     "module": "commonjs",
-    "declaration": false,
+    "declaration": true,
     "removeComments": true,
     "noLib": false,
     "emitDecoratorMetadata": true,
@@ -14,7 +15,15 @@
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitUseStrict": false,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@angular/core": ["../angular2-seed/node_modules/@angular/core/"],
+      "@angular/common": ["../angular2-seed/node_modules/@angular/common/"],
+      "@angular/common/testing": ["../angular2-seed/node_modules/@angular/common/testing/"],
+      "@angular/platform-browser": ["../angular2-seed/node_modules/@angular/platform-browser/"]
+    },
+    "rootDir": ".",
+    "outDir": "./esm/"
   },
   "exclude": [
     "node_modules",

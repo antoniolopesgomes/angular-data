@@ -2,12 +2,12 @@
   "name": "@angular/data",
   "version": "1.0.0",
   "description": "Data model for angular 2",
-  "main": "index.js",
+  "main": "esm/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "jsnext:main": "esm/index.js",
-  "typins": "index.d.ts",
+  "typins": "esm/index.d.ts",
   "keywords": [
     "data",
     "model",
@@ -16,8 +16,8 @@
   "author": "Miguel Ramos <miguel.marques.ramos@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "tslint": "^3.10.1",
-    "typescript": "^1.8.10"
+    "tslint": "next",
+    "typescript": "next"
   },
   "devDependencies": {
     "typings": "^0.8.1"
