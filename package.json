@@ -2,24 +2,42 @@
   "name": "@angular/data",
   "version": "1.0.0",
   "description": "Data model for angular 2",
-  "main": "esm/index.js",
-  "scripts": {
-    "postinstall": "./node_modules/.bin/tsc -p ."
-  },
-  "jsnext:main": "esm/index.js",
-  "typins": "esm/index.d.ts",
+  "main": "dist/index.js",
+  "jsnext:main": "dist/index.js",
+  "typins": "dist/index.d.ts",
   "keywords": [
     "data",
     "model",
     "adapter"
   ],
+  "scripts": {
+    "compile": "./node_modules/.bin/tsc -p .",
+    "build:umd": "./node_modules/.bin/rollup -c -f umd -o dist/data.umd.js",
+    "build:es2015": "./node_modules/.bin/rollup -c -f es6 -o dist/data.es2015.js"
+  },
   "author": "Miguel Ramos <miguel.marques.ramos@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "tslint": "next",
-    "typescript": "next"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "typings": "^0.8.1"
+    "@angular/common": "2.0.0-rc.1",
+    "@angular/compiler": "2.0.0-rc.1",
+    "@angular/core": "2.0.0-rc.1",
+    "@angular/http": "2.0.0-rc.1",
+    "@angular/platform-browser": "2.0.0-rc.1",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.1",
+    "@angular/router": "2.0.0-rc.1",
+    "@angular/router-deprecated": "2.0.0-rc.1",
+    "es6-module-loader": "^0.17.8",
+    "es6-promise": "^3.1.2",
+    "es6-shim": "0.35.0",
+    "reflect-metadata": "0.1.2",
+    "rollup": "^0.26.3",
+    "rollup-plugin-typescript": "^0.7.5",
+    "rxjs": "5.0.0-beta.6",
+    "systemjs": "0.19.26",
+    "tslint": "next",
+    "typescript": "next",
+    "typings": "^0.8.1",
+    "zone.js": "^0.6.12"
   }
 }

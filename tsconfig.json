@@ -5,6 +5,7 @@
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,
+    "moduleResolution": "node",
     "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -16,21 +17,15 @@
     "noImplicitReturns": true,
     "noImplicitUseStrict": false,
     "noFallthroughCasesInSwitch": true,
-    "paths": {
-      "@angular/core": ["../angular2-seed/node_modules/@angular/core/"],
-      "@angular/common": ["../angular2-seed/node_modules/@angular/common/"],
-      "@angular/common/testing": ["../angular2-seed/node_modules/@angular/common/testing/"],
-      "@angular/platform-browser": ["../angular2-seed/node_modules/@angular/platform-browser/"]
-    },
     "rootDir": ".",
-    "outDir": "./esm/"
+    "outDir": "./dist/"
   },
   "exclude": [
     "node_modules",
     "dist",
     "typings/browser.d.ts",
     "typings/browser",
-    "src"
+    "temp"
   ],
   "compileOnSave": false
 }
