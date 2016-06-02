@@ -1,5 +1,6 @@
 {
   "name": "@angular/data",
+  "private": true,
   "version": "1.0.0-alpha.0",
   "description": "Data model for angular 2",
   "main": "dist/index.js",
@@ -8,7 +9,8 @@
   "keywords": [
     "data",
     "model",
-    "adapter"
+    "adapter",
+    "angular2"
   ],
   "scripts": {
     "compile": "npm run clean:dist && npm run compile:ts && npm run build:umd && npm run build:es2015",
