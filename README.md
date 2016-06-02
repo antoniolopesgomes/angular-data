@@ -177,3 +177,4 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 * Relations (decorators)
 * Model base methods
 * Service interceptors
+* Refactor and define correct typings
