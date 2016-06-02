@@ -1,9 +1,10 @@
 import {DATA_PROVIDERS} from './data/providers';
 import {ReflectiveInjector} from '@angular/core';
 import {AdapterProvider} from './adapters/adapter.provider';
-import {makePropDecorator, makeDecorator} from '@angular/core/src/util/decorators';
-import {Model} from './data/model';
-
+import * as annotations from '@angular/core/src/util/decorators';
+import {IResource} from './data/model';
+import {Store} from './data/store';
+import {Collection} from './data/collection';
 
 /**
  * Provide a injector to search for common
@@ -41,34 +42,53 @@ function decorateAdapterProvide(target: any, key: string): any {
   }
 }
 
-export const InjectAdapter = makePropDecorator(decorateAdapterProvide);
+export const InjectAdapter = annotations.makePropDecorator(decorateAdapterProvide);
 
 
 /**
- * Data Model typing to construct the data
+ * Data Store typing to construct the data
  * object.
  *
- * @class ModelConstructable
+ * @class StoreConstructable
  */
-class ModelConstructable {
+class StoreConstructable {
 
-  model: any;
   @InjectAdapter
   adapter: any;
 
-  constructor(private _props: any) {
-    this.init();
+  constructor(private _props: IStoreMetadata) {}
+
+  register(): void {
+    this._assignAdapter();
+    this._assignCollection();
+    this._assignProps();
   }
 
-  init(): void {
-    (<any>Model.prototype).adapter = this.adapter;
-    Object.assign(this._props['model'].prototype, Model.prototype);
+  private _assignAdapter(): void {
+    Object.defineProperty(Store.prototype, 'adapter', {
+      enumerable: true,
+      value: this.adapter,
+      configurable: false
+    });
+  }
 
-    this.model = new this._props['model']();
+  private _assignCollection(): void {
+    Object.defineProperty(Store.prototype, 'collection', {
+      enumerable: true,
+      value: new Collection<IResource>(),
+      writable: true
+    });
+  }
+
+  private _assignProps(): void {
+    Object.defineProperty(Store.prototype, 'props', {
+      enumerable: true,
+      value: this._props
+    });
   }
 }
 
-export interface IModelMetadata {
+export interface IStoreMetadata {
   model: Object | Function;
   belongsTo?: any;
 }
@@ -82,7 +102,7 @@ export interface IModelMetadata {
  * @param {IModelMetadata} props (Properties metadata)
  * @returns (Function)
  */
-export function InjectModel(props: IModelMetadata): Function {
+export function InjectStore(props: IStoreMetadata): Function {
   let properties = props;
 
   if (!properties.hasOwnProperty('model')) {
@@ -90,12 +110,11 @@ export function InjectModel(props: IModelMetadata): Function {
   }
 
   return function decoratorFactory(target : Object|Function, decoratedPropertyName? : string) : any {
-    console.log('InjectModel: ', target, properties);
+    let construtable = new StoreConstructable(props);
+    construtable.register();
 
-    let construtable = new ModelConstructable(props);
-
-    Object.defineProperty((<any>target).prototype, 'model', {
-      value: construtable.model,
+    Object.defineProperty((<any>target).prototype, 'store', {
+      value: new Store(),
       enumerable: true,
       configurable: false
     });

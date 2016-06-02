@@ -1,8 +1,9 @@
 import 'rxjs/add/operator/map';
-import {Injectable, Inject} from '@angular/core';
+import {DATA_CONST} from '../constants';
 import {Observable} from 'rxjs/Observable';
 import {IAdapter} from './adapter.provider';
 import {Configurator} from '../configurator';
+import {Injectable, Inject} from '@angular/core';
 import {Http, Headers, Response, Request, RequestOptionsArgs} from '@angular/http';
 
 export interface IResourceResponse {
@@ -20,7 +21,7 @@ export class RestAdapter implements IAdapter {
   }
 
   private _buildNamespace(): void {
-    this._namespace = this._config.getOption('app.endpoint');
+    this._namespace = this._config.getOption(DATA_CONST.APP_ENDPOINT);
   }
 
   private _buildEndpoint(path: string): string {

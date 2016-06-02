@@ -1,7 +1,7 @@
+import {Store} from './data/store';
 import {Injectable} from '@angular/core';
-import {Model, IModel} from './data/model';
 import {InjectAdapter} from './annotations';
-import {IAdapter} from './adapters/adapter.provider';
+import * as Adapter from './adapters/adapter.provider';
 
 /**
  * Class to extends as service which will
@@ -15,6 +15,6 @@ import {IAdapter} from './adapters/adapter.provider';
 export class ServiceProvider {
 
   @InjectAdapter
-  adapter: IAdapter;
-  model: Model<IModel>
+  adapter: Adapter.IAdapter;
+  store: Store;
 }

@@ -5,7 +5,7 @@ import {Http, HTTP_PROVIDERS} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {Provider, ReflectiveInjector, Injectable, Inject} from '@angular/core';
 
-export interface IAdapter {
+interface IAdapter {
   namespace: string;
   get(path: string, params?: any): Observable<any>;
   post(path: string, params?: any): Observable<any>;
@@ -14,7 +14,7 @@ export interface IAdapter {
 }
 
 @Injectable()
-export class AdapterProvider {
+class AdapterProvider {
   /*private _configurator: Configurator;*/
   private _adapter: IAdapter;
   private _adapterClass: any;
@@ -54,4 +54,9 @@ export class AdapterProvider {
   get adapter(): IAdapter {
     return this._adapter;
   }
+}
+
+export {
+  IAdapter,
+  AdapterProvider
 }

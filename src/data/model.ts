@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
-export interface IModel {
+export interface IResource {
   [key: string]: any;
 }
 
-@Injectable()
+/*@Injectable()
 export class Model<Resource> {
   schema: IModel;
   collection: Array<IModel>;
@@ -26,8 +26,10 @@ export class Model<Resource> {
 
     return new BehaviorSubject(this.collection);
   }
-
-  getResourceByIndex(index: number): IModel {
-    return this.collection[index];
+}*/
+@Injectable()
+export class Model<IResource> {
+  toJSON(): any {
+    return JSON.parse(JSON.stringify(Object.keys(this)));
   }
 }

@@ -64,6 +64,27 @@ export function capitalizeFirstLetter(word: string): string {
     return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
+export function mix(...classes: any[]): any {
+    class MultiInheriance {}
+    // Programmatically add all the methods and accessors
+    // of the mixins to class Mix.
+    for (let mixin of classes) {
+        copyProperties(MultiInheriance, mixin);
+        copyProperties(MultiInheriance.prototype, mixin.prototype);
+    }
+
+    return MultiInheriance;
+}
+
+export function copyProperties(target: Object, source: Object): void {
+    for (let key of Reflect.ownKeys(source)) {
+        if (key !== "constructor" && key !== "prototype" && key !== "name") {
+            let desc = Object.getOwnPropertyDescriptor(source, <string>key);
+            Object.defineProperty(target, <string>key, desc);
+        }
+    }
+}
+
 /**
  * Invoke a Constructor function with one or more arguments.
  *
@@ -104,32 +125,4 @@ export function capitalizeFirstLetter(word: string): string {
  *
  * @type {string}
  */
-/*export const CONSTRUCTOR_PROPERTY_NAME = 'constructor';
-
-export function InjectDependency(resources: any[]): Function {
-  return function depInject(target: Object, key: string, descriptor: TypedPropertyDescriptor<any>): any {
-    if (descriptor === undefined || !isObject(descriptor)) {
-      let property = Object.getOwnPropertyDescriptor(target, key);
-      descriptor = isUndefined(property)
-                    ? <TypedPropertyDescriptor<any>>{ enumerable: true, value: function() {}}
-                    : property;
-    }
-
-    let originalMethod: any = descriptor.value;
-    //editing the descriptor/value parameter
-    //Object.assign(target, settings);
-    descriptor.value = function() {
-      let injector = ReflectiveInjector.resolveAndCreate(resources);
-      //var car = injector.get(Car);
-      //Object.assign((<any>this).metadata, injector);
-      Object.defineProperty((<any>this), key, {
-        enumerable: true,
-        value: injector
-      });
-
-      originalMethod.apply(this, []);
-    }
-
-    return descriptor;
-  }
-}*/
+/*export const CONSTRUCTOR_PROPERTY_NAME = 'constructor';*/
