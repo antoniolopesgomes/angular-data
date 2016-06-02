@@ -11,7 +11,9 @@
     "adapter"
   ],
   "scripts": {
-    "compile": "./node_modules/.bin/tsc -p ./tsconfig-compile.json",
+    "compile": "npm run clean:dist && npm run compile:ts && npm run build:umd && npm run build:es2015",
+    "clean:dist": "rm -rf ./dist",
+    "compile:ts": "./node_modules/.bin/tsc -p ./tsconfig-compile.json",
     "build:umd": "./node_modules/.bin/rollup -c -f umd -o dist/data.umd.js",
     "build:es2015": "./node_modules/.bin/rollup -c -f es6 -o dist/data.es2015.js"
   },
