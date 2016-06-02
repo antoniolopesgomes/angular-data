@@ -23,7 +23,7 @@ Angular 2 data models.
     npm i
     cd node_modules/@angular
     ln -s ../../angular-data data
-
+    
 Create a options.ts file on src/client/config and insert content bellow.
 
 ### Options.ts
@@ -33,13 +33,13 @@ Create a options.ts file on src/client/config and insert content bellow.
 	  'app.endpoint': 'http://jsonplaceholder.typicode.com',
 	  'app.adapter': 'REST'
 	};
-
-On index.html page add options script to header
-
-### Index.html
+	
+On index.html page add options script to header	
+	
+### Index.html	
 
 	<script src="/config/options.js"></script>
-
+	
 On main.ts add data providers.
 
 ### Main.ts
@@ -60,13 +60,13 @@ On main.ts add data providers.
       DATA_PROVIDERS,
       provide(APP_BASE_HREF, { useValue: '<%= APP_BASE %>' })
     ]);
-
+    
 Create user.model.ts in src/client/app/+home and add content bellow.
 
 ### User.model.ts
 
 	import {Injectable} from '@angular/core';
-
+	
 	@Injectable()
 	export class User {
 	  address: {} = {};
@@ -75,12 +75,12 @@ Create user.model.ts in src/client/app/+home and add content bellow.
 	  name: string = null;
 	  email: string = null;
 	  website: string = null;
-
+	
 	  get nameEmail(): string {
 	    return `${this.name} <${this.email}>`;
 	  }
 	}
-
+	
 Create home.service ts file in src/client/app/+home and add content bellow.
 
 ### Home.service.ts
@@ -89,7 +89,7 @@ Create home.service ts file in src/client/app/+home and add content bellow.
 	import {InjectStore} from '@angular/data';
 	import {ServiceProvider} from '@angular/data';
 	import {User} from './user.model';
-
+	
 	@Injectable()
 	@InjectStore({
 	  model: User
@@ -105,7 +105,7 @@ Create home.service ts file in src/client/app/+home and add content bellow.
 	    });
 	  }
 	}
-
+	
 On home.component.ts change to the following code:
 
 ### Home.component.ts
@@ -115,7 +115,7 @@ On home.component.ts change to the following code:
 	import {User} from './user.model';
 	import {HomeService} from './home.service';
 	import { NameListService } from '../shared/index';
-
+	
 	@Component({
 	  selector: 'sd-home',
 	  templateUrl: 'app/+home/home.component.html',
@@ -126,7 +126,7 @@ On home.component.ts change to the following code:
 	export class HomeComponent implements OnInit {
 	  newName: string;
 	  constructor(public nameListService: NameListService, private _service: HomeService) {}
-
+	
 	  ngOnInit() {
 	    this._service.all().subscribe((users: User[])=> {
 	      users.map((user: User) => {
@@ -145,7 +145,7 @@ On home.component.ts change to the following code:
 	    return false;
 	  }
 	}
-
+    
 
 Run angular2-seed check new names on home page and check console on browser to see store object.
 
@@ -170,3 +170,10 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 ## Node Compatibility
 
 * v6.2.0
+
+## TODO
+
+* Validation on models
+* Relations (decorators)
+* Model base methods
+* Service interceptors
