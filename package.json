@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.0",
   "description": "Data model for angular 2",
   "main": "dist/index.js",
-  "jsnext:main": "dist/index.js",
+  "jsnext:main": "dist/data.es2015.js",
   "typins": "dist/index.d.ts",
   "keywords": [
     "data",
